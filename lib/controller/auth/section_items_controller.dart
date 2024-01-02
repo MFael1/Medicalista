@@ -1,10 +1,12 @@
 import 'package:get/get.dart';
 import 'package:medicalista/core/classes/status_request.dart';
+import 'package:medicalista/core/constant/routes_names.dart';
 import 'package:medicalista/core/functions/handling_data.dart';
 import 'package:medicalista/data/source/remote/sections/sec1.dart';
 
 abstract class SectionItemsController extends GetxController {
   getItems();
+  goToProduct();
 }
 
 class SectionItemsControllerImp extends SectionItemsController {
@@ -26,7 +28,11 @@ class SectionItemsControllerImp extends SectionItemsController {
           title: "not found", middleText: 'there are no medicines');
       statusRequest = StatusRequest.failure;
     }
-    print('hello world');
     update();
+  }
+
+  @override
+  goToProduct() {
+    Get.toNamed(AppRoutes.product);
   }
 }

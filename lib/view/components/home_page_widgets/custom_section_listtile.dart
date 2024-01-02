@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medicalista/core/constant/color.dart';
 
 class CustomSectionListTile extends StatelessWidget {
   const CustomSectionListTile(
@@ -18,12 +19,12 @@ class CustomSectionListTile extends StatelessWidget {
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(16)),
       child: ListTile(
         shape: RoundedRectangleBorder(
-          side: const BorderSide(color: Colors.teal, width: 2),
+          side: const BorderSide(color: AppColor.eFifthColor, width: 2),
           borderRadius: BorderRadius.circular(16),
         ),
         title: Text(title),
         subtitle: Text(subtitle),
-        tileColor: Colors.tealAccent,
+        tileColor: AppColor.eFirstColor,
         enabled: true,
         onTap: onTap,
       ),

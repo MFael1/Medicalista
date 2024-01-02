@@ -1,5 +1,5 @@
 class AppLinks {
-  static const String server = "http://192.168.137.188:8000/api";
+  static const String server = "http://192.168.12.1:8000/api";
 
   //___________________________________Auth_____________________________________________
 
@@ -9,4 +9,8 @@ class AppLinks {
   //_______________________________med_________________________________
 
   static const String sectionMed = "$server/warehouses/medicines";
+
+  //_______________________________order_______________________________
+
+  static const String makeOrder = "$server/orders";
 }

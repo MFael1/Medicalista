@@ -8,11 +8,15 @@ import 'package:medicalista/core/services/services.dart';
 
 class Crud {
   MyService myService = Get.find();
-  Future<Either<StatusRequest, Map>> postData(String linkurl, Map data) async {
+  Future<Either<StatusRequest, Map>> postData(String linkurl, data) async {
     try {
-      var response = await http.post(Uri.parse(linkurl),
-          body: jsonEncode(data),
-          headers: {"Content-Type": "application/json"});
+      var response =
+          await http.post(Uri.parse(linkurl), body: jsonEncode(data), headers: {
+        "Content-Type": "application/json",
+        "Authorization":
+            "Bearer ${myService.sharedPreferences.getString('token')}"
+      });
+      print('8888888888888888888888888888');
       print(response.body);
       if (response.statusCode - 200 < 100) {
         Map responsebody = jsonDecode(response.body);
@@ -35,9 +39,27 @@ class Crud {
             "Bearer ${myService.sharedPreferences.getString('token')}"
       });
       print(response.statusCode);
-      print(secName);
+      print(myService.sharedPreferences.getString('token'));
       if (response.statusCode - 200 < 100) {
         print('completeddddddddd');
+        List responsebody = jsonDecode(response.body);
+        return right(responsebody);
+      } else {
+        return left(StatusRequest.serverfailure);
+      }
+    } catch (e) {
+      return left(StatusRequest.serverexception);
+    }
+  }
+
+  Future<Either<StatusRequest, List>> getMyOrdersData(String linkurl) async {
+    try {
+      var response = await http.get(Uri.parse(linkurl), headers: {
+        "Content-Type": "application/json",
+        "Authorization":
+            "Bearer ${myService.sharedPreferences.getString('token')}"
+      });
+      if (response.statusCode - 200 < 100) {
         List responsebody = jsonDecode(response.body);
         return right(responsebody);
       } else {

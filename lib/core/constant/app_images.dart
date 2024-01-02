@@ -3,6 +3,7 @@ class AppImageAssets {
   static const String onBoardingImage1 = '$root/ex1cart.png';
   static const String onBoardingImage2 = '$root/ex2cart.png';
   static const String onBoardingImage3 = '$root/ex3cart.png';
+  static const String productWallpaper = '$root/productwallpaper.png';
 
   //_________________________status request______________________________
 

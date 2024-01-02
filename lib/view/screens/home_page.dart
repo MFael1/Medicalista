@@ -4,6 +4,7 @@ import 'package:lottie/lottie.dart';
 import 'package:medicalista/controller/auth/section_items_controller.dart';
 import 'package:medicalista/controller/home_page_controller.dart';
 import 'package:medicalista/core/constant/app_images.dart';
+import 'package:medicalista/core/constant/color.dart';
 import 'package:medicalista/core/constant/routes_names.dart';
 import 'package:medicalista/core/services/services.dart';
 import 'package:medicalista/view/components/home_page_widgets/custom_section_listtile.dart';
@@ -18,21 +19,31 @@ class HomePage extends StatelessWidget {
         Get.put(SectionItemsControllerImp());
 
     return Scaffold(
+      backgroundColor: Color(0xffffffff),
       appBar: AppBar(
-        backgroundColor: Colors.teal,
+        backgroundColor: AppColor.eFifthColor,
         title: Text('5.0'.tr,
             style: const TextStyle(
-                fontSize: 24,
+                fontSize: 22,
                 fontWeight: FontWeight.bold,
                 color: Colors.white)),
         actions: [
+          IconButton(
+              onPressed: () {
+                controller.goToCart();
+                print(controller.cart.length);
+              },
+              icon: const Icon(
+                Icons.shopping_cart_rounded,
+                color: Colors.white,
+              )),
           IconButton(
             onPressed: () {},
             icon: const Icon(
               Icons.notifications_active,
               color: Colors.white,
             ),
-          )
+          ),
         ],
       ),
       //_______________________________drawer____________________________________
@@ -43,7 +54,7 @@ class HomePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Container(
-                decoration: const BoxDecoration(color: Colors.tealAccent),
+                decoration: const BoxDecoration(color: AppColor.eFirstColor),
                 padding: const EdgeInsets.only(top: 60, bottom: 24),
                 child: Column(
                   children: [
@@ -60,7 +71,10 @@ class HomePage extends StatelessWidget {
                     Text(
                       controller.myService.sharedPreferences
                           .getString('firstname')!,
-                      style: const TextStyle(fontSize: 28),
+                      style: const TextStyle(
+                          fontSize: 28,
+                          color: AppColor.eFourthColor,
+                          fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
                       height: 10,
@@ -68,7 +82,8 @@ class HomePage extends StatelessWidget {
                     Text(
                       controller.myService.sharedPreferences
                           .getString('email')!,
-                      style: const TextStyle(fontSize: 16),
+                      style: const TextStyle(
+                          fontSize: 16, color: AppColor.eFourthColor),
                     )
                   ],
                 ),
@@ -79,44 +94,57 @@ class HomePage extends StatelessWidget {
                   runSpacing: 10,
                   children: [
                     ListTile(
-                      leading: const Icon(Icons.view_list),
-                      title: const Text('Orders'),
+                      leading: const Icon(
+                        Icons.view_list,
+                        color: AppColor.eFifthColor,
+                      ),
+                      title: Text('6.0'.tr),
+                      onTap: () {
+                        controller.goToOrderes();
+                      },
+                    ),
+                    ListTile(
+                      leading: const Icon(Icons.person_outline,
+                          color: AppColor.eFifthColor),
+                      title: Text('6.1'.tr),
                       onTap: () {},
                     ),
                     ListTile(
-                      leading: const Icon(Icons.person_outline),
-                      title: const Text('Profile'),
+                      leading: const Icon(Icons.favorite_border,
+                          color: AppColor.eFifthColor),
+                      title: Text('6.2'.tr),
                       onTap: () {},
                     ),
                     ListTile(
-                      leading: const Icon(Icons.favorite_border),
-                      title: const Text('Favorites'),
-                      onTap: () {},
-                    ),
-                    ListTile(
-                      leading: const Icon(Icons.history),
-                      title: const Text('History'),
+                      leading: const Icon(Icons.history,
+                          color: AppColor.eFifthColor),
+                      title: Text('6.3'.tr),
                       onTap: () {},
                     ),
                     const Divider(),
                     ListTile(
-                      leading: const Icon(Icons.settings),
-                      title: const Text('Settings'),
+                      leading: const Icon(Icons.settings,
+                          color: AppColor.eFifthColor),
+                      title: Text('6.4'.tr),
                       onTap: () {
-                        Get.toNamed(AppRoutes.language);
+                        Get.toNamed(AppRoutes.changeLanguage);
                       },
                     ),
                     ListTile(
-                      leading: const Icon(Icons.logout),
-                      title: const Text('Logout'),
-                      onTap: () {
-                        controller.myService.sharedPreferences.clear();
-                        Get.offAllNamed(AppRoutes.login);
-                      },
-                    ),
+                        leading: const Icon(Icons.logout,
+                            color: AppColor.eFifthColor),
+                        title: Text('6.5'.tr),
+                        onTap: () {
+                          controller.myService.sharedPreferences.clear();
+                          controller.myService.sharedPreferences
+                              .setString('step', '1');
+
+                          Get.offAllNamed(AppRoutes.login);
+                        }),
                     ListTile(
-                      leading: const Icon(Icons.medication),
-                      title: const Text('About'),
+                      leading: const Icon(Icons.medication,
+                          color: AppColor.eFifthColor),
+                      title: Text('6.6'.tr),
                       onTap: () {},
                     ),
                   ],
@@ -134,7 +162,8 @@ class HomePage extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            // Lottie.asset(AppImageAssets.factoryOne, height: 300),
+            Lottie.asset(AppImageAssets.girlLieOnCouch,
+                height: 280, repeat: false),
             CustomSectionListTile(
                 title: '5.1'.tr,
                 subtitle: '5.2'.tr, //Analgesics
@@ -167,6 +196,31 @@ class HomePage extends StatelessWidget {
                   seccontorller.getItems();
                   controller.goToSectionItems();
                 }),
+            // SizedBox(
+            //   height: 30,
+            // ),
+            // IconButton(
+            //     onPressed: () {
+            //       controller.goToCart();
+            //       print(controller.cart.length);
+            //     },
+            //     icon: Icon(
+            //       Icons.shopping_cart_rounded,
+            //       color: AppColor.eFifthColor,
+            //       size: 50,
+            //     )),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     Text(
+            //       'Cart',
+            //       style: TextStyle(
+            //           fontWeight: FontWeight.bold,
+            //           fontSize: 22,
+            //           color: AppColor.eFourthColor),
+            //     ),
+            //   ],
+            // )
           ],
         ),
       ),
